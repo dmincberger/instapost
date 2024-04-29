@@ -3,6 +3,7 @@ import path from "path"
 let Funkcje_Plikow = {
     Stworz_album: async (sciezka, nazwa) => {
         if (fs.existsSync(path.join(sciezka, nazwa))) {
+
             return 0
         } else {
             fs.mkdirSync(path.join(sciezka, nazwa))
@@ -11,7 +12,7 @@ let Funkcje_Plikow = {
     },
 
     Przenies_plik: async (root_sciezka, stary_upload, nazwa_albumu) => {
-        console.log("FEJWFJE");
+
         let splitowany_stary_upload = stary_upload.split("\\")
         splitowany_stary_upload.splice(1, 0, nazwa_albumu)
         let nowy_upload = splitowany_stary_upload.join("\\")

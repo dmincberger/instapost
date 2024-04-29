@@ -1,0 +1,17 @@
+GET http://localhost:3000/JSONBC_encrypt HTTP/1.1
+
+###
+
+GET http://localhost:3000/JSONBC_decrypt HTTP/1.1
+
+###
+
+GET http://localhost:3000/JSONWT_create HTTP/1.1
+
+###
+
+GET http://localhost:3000/JSONWT_verify HTTP/1.1
+
+
+### przy testowaniu tokenow, stworzyc token uzywajac JSONWT_create po czym skopiowac go, i testowac tym co dostalem
+### w przyszlosci bedziemy przechowywac token faktycznie gdzies np w STORE w VUE

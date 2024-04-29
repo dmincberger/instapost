@@ -47,8 +47,9 @@ const tagsRouter = async (req, res) => {
                 console.log(odpowiedz);
                 res.write(odpowiedz)
                 res.end()
-
             }
+
+        case "PATCH":
     }
 }
 

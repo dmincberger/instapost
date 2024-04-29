@@ -29,7 +29,12 @@ let funkcje_JSON = {
             "timestamp": Date.now()
         }
         zdjecia_dane[index]["history"].push(zmiana)
+    },
+
+    Aktualizacja_zdjecia(zdjecie, index) {
+        zdjecia_dane[index] = zdjecie
     }
+
 }
 
 

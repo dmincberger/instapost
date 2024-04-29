@@ -19,4 +19,9 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/api/photos/1714312378057/tags
+PATCH http://localhost:3000/api/photos/1714413629336/tags HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "testowytag"
+}

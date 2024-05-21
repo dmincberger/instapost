@@ -13,13 +13,15 @@ const tagsRouter = async (req, res) => {
                 console.log(wszystkie_tagi);
                 res.write(JSON.stringify(wszystkie_tagi))
                 res.end()
+                break
             }
-            if (req.url == "/api/tags") {
+            else if (req.url == "/api/tags") {
                 let tagi = funkcje_tagow.get_tagi()
                 res.write(JSON.stringify(tagi, 5, null))
                 res.end()
+                break
             }
-            if (req.url.match(/\/api\/tags\/\d+/)) {
+            else if (req.url.match(/\/api\/tags\/\d+/)) {
                 let url_rozbite = req.url.split("/")
                 let numer_tagu = url_rozbite[3]
                 if (wszystkie_tagi[numer_tagu] != undefined) {
@@ -30,9 +32,11 @@ const tagsRouter = async (req, res) => {
                     }
                     res.write(JSON.stringify(potrzebny_tag, 5, null))
                     res.end()
+                    break
                 } else {
                     res.write("Tag o takim id nie istnieje")
                     res.end()
+                    break
                 }
             }
         case "POST":
@@ -47,6 +51,7 @@ const tagsRouter = async (req, res) => {
                 console.log(odpowiedz);
                 res.write(odpowiedz)
                 res.end()
+                break
             }
 
         case "PATCH":

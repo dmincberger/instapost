@@ -17,7 +17,7 @@ user_album_jeden_test
 GET http://localhost:3000/api/photos HTTP/1.1
 
 ###
-GET http://localhost:3000/api/photos/1714412177573 HTTP/1.1
+GET http://localhost:3000/api/photos/1714413715887 HTTP/1.1
 
 ###
 

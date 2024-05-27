@@ -39,4 +39,20 @@ const getRequestData = async (req) => {
     })
 
 }
+
+export const get_body_data = async (req) => {
+    return new Promise((resolve, reject) => {
+        let body = "";
+
+        req.on("data", (data) => {
+            body += data.toString();
+        })
+
+        req.on("end", (data) => {
+            resolve(body)
+        })
+    })
+
+}
+
 export default getRequestData

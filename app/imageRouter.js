@@ -1,7 +1,6 @@
 import 'fs'
 import path from "path";
 import getRequestData from './getRequestData.js';
-import * as logger from "tracer"
 import funkcje_JSON, { zdjecia_dane } from './jsonController.js';
 import { funkcje_tagow, wszystkie_tagi } from './tagsController.js';
 

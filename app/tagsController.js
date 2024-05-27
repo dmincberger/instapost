@@ -150,4 +150,4 @@ export const funkcje_tagow = {
     }
 }
 
-export { wszystkie_tagi, tagi_popularność }
+export { wszystkie_tagi }

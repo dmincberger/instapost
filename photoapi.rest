@@ -11,13 +11,13 @@ Content-Type: image/jpeg
 Content-Disposition: form-data; name="album"
 Content-Type: text/plain
 
-user_album_jeden_test
+house
 ------FormBoundary1234
 ###
 GET http://localhost:3000/api/photos HTTP/1.1
 
 ###
-GET http://localhost:3000/api/photos/1716291396435 HTTP/1.1
+GET http://localhost:3000/api/photos/1716791370587 HTTP/1.1
 
 ###
 

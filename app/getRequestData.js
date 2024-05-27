@@ -6,6 +6,7 @@ import * as fs from 'fs'
 
 
 
+
 let __dirname = path.resolve()
 const getRequestData = async (req) => {
 
@@ -14,8 +15,12 @@ const getRequestData = async (req) => {
             let form = formidable({});
 
             form.uploadDir = 'uploads'
-
+            form.keepExtensions = true;
             form.parse(req, async function (err, fields, files) {
+                let split_path = files["file"]["path"].split("\\")
+                split_path.pop()
+                split_path.push(files["file"]["name"])
+                split_path.join("\\")
                 await Funkcje_Plikow.Stworz_album(path.join(__dirname, "uploads"), fields["album"])
                 await Funkcje_Plikow.Przenies_plik(__dirname, files["file"]["path"], fields["album"])
                 // console.log("----- przesłane pola z formularza ------");

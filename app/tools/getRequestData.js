@@ -1,6 +1,6 @@
 import formidable from "formidable";
 import path from "path";
-import Funkcje_Plikow from "./fileController.js";
+import Funkcje_Plikow from "../controllers/fileController.js";
 import * as fs from 'fs'
 
 

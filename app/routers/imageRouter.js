@@ -1,8 +1,7 @@
 import 'fs'
-import path from "path";
-import getRequestData from './getRequestData.js';
-import funkcje_JSON, { zdjecia_dane } from './jsonController.js';
-import { funkcje_tagow, wszystkie_tagi } from './tagsController.js';
+import getRequestData from '../tools/getRequestData.js';
+import funkcje_JSON, { zdjecia_dane } from '../controllers/jsonController.js';
+import { funkcje_tagow, wszystkie_tagi } from '../controllers/tagsController.js';
 
 const imageRouter = async (req, res) => {
     switch (req.method) {

@@ -1,8 +1,9 @@
 import { createServer } from 'http';
-import imageRouter from "./app/imageRouter.js";
-import tagsRouter from './app/tagsRouter.js'
-import filterRouter from './app/filterRouter.js';
-import image_get_Router from './app/imagegetRouter.js';
+import imageRouter from "./app/routers/imageRouter.js";
+import tagsRouter from './app/routers/tagsRouter.js'
+import filterRouter from './app/routers/filterRouter.js';
+import image_get_Router from './app/routers/imagegetRouter.js';
+import user_router from './app/routers/userRouter.js';
 let PORT = 3000
 createServer(async (req, res) => {
 
@@ -20,6 +21,8 @@ createServer(async (req, res) => {
         await filterRouter(req, res)
     } else if (req.url.search("/api/getimage") != -1) {
         await image_get_Router(req, res)
+    } else if (req.url.search("/api/user") != -1) {
+        await user_router(req, res)
     }
 
 })

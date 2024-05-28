@@ -1,10 +1,5 @@
 import 'fs'
-import path from "path";
-import getRequestData from './getRequestData.js';
-import funkcje_JSON, { zdjecia_dane } from './jsonController.js';
-import { wszystkie_tagi } from './tagsController.js';
-import { funkcje_tagow } from './tagsController.js';
-
+import { wszystkie_tagi, funkcje_tagow } from '../controllers/tagsController.js';
 const tagsRouter = async (req, res) => {
     switch (req.method) {
         case "GET":

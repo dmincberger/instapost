@@ -1,7 +1,7 @@
-import filter_functions from "./filterController.js"
-import { zdjecia_dane } from "./jsonController.js"
-import { get_body_data } from "./getRequestData.js"
-import image_getting from "./imagegetter.js";
+import filter_functions from "../controllers/filterController.js"
+import funkcje_JSON, { zdjecia_dane } from "../controllers/jsonController.js"
+import { get_body_data } from "../tools/getRequestData.js"
+import image_getting from "../tools/imagegetter.js";
 
 const filterRouter = async (req, res) => {
     switch (req.method) {
@@ -34,6 +34,15 @@ const filterRouter = async (req, res) => {
                 } else {
                     let chosen_filter = dane_parsed["filter"]
                     let new_path = await filter_functions.filter_photo(found_url, chosen_filter)
+                    let history_update = {
+                        "status": chosen_filter,
+                        "timestamp": Date.now(),
+                        "url": new_path
+                    }
+                    let found_photo = found_photos[0]
+                    let photo_index = zdjecia_dane.indexOf(found_photo)
+                    found_photo["history"].push(history_update)
+                    funkcje_JSON.Aktualizacja_zdjecia(found_photo, photo_index)
                     let photo = await image_getting.get_file(new_path)
                     res.setHeader('Content-Type', 'image/jpeg')
                     res.write(photo)

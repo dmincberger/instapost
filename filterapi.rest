@@ -2,7 +2,7 @@ GET http://localhost:3000/api/filters/metadata/1716793017359 HTTP/1.1
 
 ###
 
-GET http://localhost:3000/api/getimage/1716831616002 HTTP/1.1
+GET http://localhost:3000/api/getimage/1716896264046 HTTP/1.1
 
 ###
 
@@ -10,6 +10,12 @@ PATCH http://localhost:3000/api/filters
 Content-Type: 'application/json'
 
 {
-    "id": 1716831616002,
-    "filter": "crop"
+    "id": 1716896264046,
+    "filter": "negate"
 }
+
+###
+
+GET http://localhost:3000/api/getimage/1716896264046/filter/rotate HTTP/1.1
+
+###

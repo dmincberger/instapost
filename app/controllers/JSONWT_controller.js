@@ -29,7 +29,6 @@ const token_functions = {
     },
     process_token: async () => {
         let token = await createToken()
-        console.log("PRZEKAZYWANY TOKEN: " + token);
         verifyToken(token)
     }
 }

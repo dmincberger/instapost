@@ -36,6 +36,20 @@ const user_router = async (req, res) => {
                 let data = await get_body_data(req)
                 let parsed_data = JSON.parse(data)
                 let plain_password = parsed_data["password"]
+                if (plain_password.length <= 3) {
+                    res.setHeader("Content-type", "text/plain")
+                    res.write("twoje haslo nie jest wystarczajaco dlugie")
+                    res.end()
+                    return 0
+                }
+                for (const user of current_users_JSON) {
+                    if (user["email"] == parsed_data["email"]) {
+                        res.setHeader("Content-type", "text/plain")
+                        res.write("na podany email jest juz zalozone konto")
+                        res.end()
+                        return 0
+                    }
+                }
                 let hashed_password = await user_functions.encrypt_pass(plain_password)
                 let new_user = {
                     "id": Date.now(),

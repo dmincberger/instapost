@@ -4,6 +4,7 @@ import tagsRouter from './app/routers/tagsRouter.js'
 import filterRouter from './app/routers/filterRouter.js';
 import image_get_Router from './app/routers/imagegetRouter.js';
 import user_router from './app/routers/userRouter.js';
+import profile_router from './app/routers/profileRouter.js';
 let PORT = 3000
 createServer(async (req, res) => {
 
@@ -23,6 +24,8 @@ createServer(async (req, res) => {
         await image_get_Router(req, res)
     } else if (req.url.search("/api/user") != -1) {
         await user_router(req, res)
+    } else if (req.url.search("/api/profile") != -1) {
+        await profile_router(req, res)
     }
 
 })

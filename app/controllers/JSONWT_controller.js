@@ -1,17 +1,20 @@
 import bcryptjs from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
+import 'dotenv/config'
 const { hash, compare } = bcryptjs;
 const { sign, verify } = jsonwebtoken;
 let SECRET_KEY = process.env.SECRET_KEY
 
+export let expired_tokens = []
+
 const token_functions = {
-    create_token: async (email) => {
+    create_token: async (email, expiration) => {
 
         let token = await sign(
             { "email": email },
             SECRET_KEY, // key powinien być zapisany w .env
             {
-                expiresIn: "30s" // "1m", "1d", "24h"
+                expiresIn: expiration // "1m", "1d", "24h"
             }
         );
         console.log({ token: token });
@@ -30,7 +33,12 @@ const token_functions = {
     process_token: async () => {
         let token = await createToken()
         verifyToken(token)
+    },
+
+    expire_a_token(token) {
+        expired_tokens.push(token)
     }
+
 }
 
 export default token_functions

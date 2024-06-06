@@ -1,2 +1,27 @@
 GET http://localhost:3000/api/profile HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbWVAZW1haWwucGwiLCJpYXQiOjE3MTY5NjIzNDUsImV4cCI6MTcxNjk2MjM3NX0.oqkT6M4ELjvs4g1maFURY4D8ZFarK9GN57MIIxlnOtY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbWVAZW1haWwucGwiLCJpYXQiOjE3MTcxODkxMDEsImV4cCI6MTcxNzI3NTUwMX0.VDX0uGMgGUGjwqgrKJWM64uLsQLj-AXdA8FwqkRvneA
+
+###
+
+PATCH http://localhost:3000/api/profile HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbWVAZW1haWwucGwiLCJpYXQiOjE3MTcxODgyMDEsImV4cCI6MTcxNzI3NDYwMX0.QqMz86t9I7r1_GZjcP51y0PVoPgCnGFTGUlA49tFUlg
+Content-Type: "application/json"
+
+{
+    "name": "john",
+    "lastname": "snape"
+}
+
+###
+
+POST http://localhost:3000/api/profile HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbWVAZW1haWwucGwiLCJpYXQiOjE3MTcxODkyNTMsImV4cCI6MTcxNzI3NTY1M30.2VBA397SHIYdrso3ueSohdz5N4SXw-SbYi5tsIrOm3A
+Content-Type: multipart/form-data; boundary=----FormBoundary1234
+
+------FormBoundary1234
+Content-Disposition: form-data; name="file"; filename="input.jpg"
+Content-Type: image/jpeg
+
+< ./input.jpg
+
+------FormBoundary1234

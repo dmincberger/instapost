@@ -22,6 +22,16 @@ let Funkcje_Plikow = {
         console.log(`STARA SCIEZKA: ${stara_sciezka}`);
         fs.renameSync(stara_sciezka, nowa_sciezka)
         return 0
+    },
+
+    Upload_profile_picture: async (root_sciezka, stara_sciezka, sciezka) => {
+        sciezka = sciezka.join("/")
+        console.log(`NOWA SCIEZKA: ${sciezka}`);
+        console.log(`STARA SCIEZKA: ${stara_sciezka}`);
+        fs.renameSync(stara_sciezka, sciezka)
+
+        return 0
     }
+
 }
 export default Funkcje_Plikow

@@ -1,4 +1,5 @@
 POST http://localhost:3000/api/photos HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpYnJ1c251bWVyQGludGVyaWEucGwiLCJpYXQiOjE3MTc2OTU3MjgsImV4cCI6MTcxNzc4MjEyOH0.6EJ0fm7e2osvAzlIWx59t8b2EV-f_bkbX0lj8LQL4wY
 Content-Type: multipart/form-data; boundary=----FormBoundary1234
 
 ------FormBoundary1234

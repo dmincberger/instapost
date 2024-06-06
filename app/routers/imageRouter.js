@@ -2,6 +2,7 @@ import 'fs'
 import getRequestData from '../tools/getRequestData.js';
 import funkcje_JSON, { zdjecia_dane } from '../controllers/jsonController.js';
 import { funkcje_tagow, wszystkie_tagi } from '../controllers/tagsController.js';
+import token_functions from "../controllers/JSONWT_controller.js"
 
 const imageRouter = async (req, res) => {
     switch (req.method) {
@@ -63,17 +64,19 @@ const imageRouter = async (req, res) => {
             //     // console.log("NAZWA: " + nazwa);
             //     // console.log("kolor: " + kolor);
             if (req.url == "/api/photos") {
-
-                let dane = await getRequestData(req) // dostaje obiekt fields: fields, files: files
+                let token = req.headers.authorization.split(" ")[1]
+                let decoded_token = token_functions.verify_token(token)
+                let email = decoded_token["email"]
+                let nazwa_albumu = email
+                let dane = await getRequestData(req, nazwa_albumu) // dostaje obiekt fields: fields, files: files
                 let splitowany_stary_upload = dane["files"]["file"]["path"].split("\\")
                 // console.log(dane);
-                let nazwa_albumu = dane["fields"]["album"]
                 splitowany_stary_upload.splice(1, 0, nazwa_albumu)
 
                 let nowy_upload = splitowany_stary_upload.join("\\")
-                funkcje_JSON.dodaj_zdjecie(dane["fields"], dane["files"], nowy_upload)
+                funkcje_JSON.dodaj_zdjecie(nazwa_albumu, dane["files"], nowy_upload)
                 console.log("DANE: " + JSON.stringify(zdjecia_dane, 5, null));
-                res.write("CO")
+                res.write("POSTED")
                 res.end()
 
             }

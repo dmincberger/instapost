@@ -1,5 +1,5 @@
 import 'fs'
-import getRequestData from '../tools/getRequestData.js';
+import getRequestData, { get_body_data } from '../tools/getRequestData.js';
 import funkcje_JSON, { zdjecia_dane } from '../controllers/jsonController.js';
 import { funkcje_tagow, wszystkie_tagi } from '../controllers/tagsController.js';
 import token_functions from "../controllers/JSONWT_controller.js"
@@ -43,12 +43,14 @@ const imageRouter = async (req, res) => {
                     res.end()
                     break
                 } else {
+                    console.log("zdjecie nie ");
                     res.write("Zdjęcie nie istnieje")
                     res.end()
                     break
                 }
             }
             else if (req.url == "/api/photos") {
+                console.log("zdjecie tak");
                 res.write(JSON.stringify(zdjecia_dane, 5, null))
                 res.end()
                 break
@@ -56,13 +58,6 @@ const imageRouter = async (req, res) => {
             break;
 
         case "POST":
-            // if (request.url == "/addone") {
-            //     let dane = await getRequestData(request) // dostaje dane z posta
-            //     console.log(JSON.parse(dane))
-            //     // let nazwa = dane["nazwa"]
-            //     // let kolor = dane["kolor"]
-            //     // console.log("NAZWA: " + nazwa);
-            //     // console.log("kolor: " + kolor);
             if (req.url == "/api/photos") {
                 let token = req.headers.authorization.split(" ")[1]
                 let decoded_token = token_functions.verify_token(token)
@@ -101,28 +96,38 @@ const imageRouter = async (req, res) => {
             break
         case "PATCH":
             if (req.url.match(/\/api\/photos\/([0-9]+)\/tags\/mass/)) {
-                let dane = await funkcje_tagow.zdobadz_dane(req)
-                console.log(JSON.stringify(dane));
+                console.log("wtf");
+                let dane = await get_body_data(req)
+                console.log(dane);
                 let dane_parsed = JSON.parse(dane)
+                console.log(dane_parsed);
                 let dodawane_tagi = dane_parsed["tags"]
                 let url_split = req.url.split("/")
                 let szukane_id = url_split[3]
-                let szukane_zdjecie = zdjecia_dane.filter((zdjecie) => zdjecie["id"] == szukane_id)[0]
-                if (szukane_zdjecie) {
+                let szukane_zdjecie_tablica = zdjecia_dane.filter((element) => element["id"] == szukane_id)
+                let szukane_zdjecie = szukane_zdjecie_tablica[0]
+
+                if (szukane_zdjecie_tablica.length == 0) {
+                    res.write("Nie ma zdjecia o takim id")
+                    res.end()
+                    break
+                }
+
+                else {
                     let index = zdjecia_dane.indexOf(szukane_zdjecie)
+                    szukane_zdjecie["tags"] = []
                     dodawane_tagi.forEach(tag => {
-                        let dodawany_tag = tag["name"]
-                        if (!szukane_zdjecie["tags"].includes(dodawany_tag)) {
-                            szukane_zdjecie["tags"].push(dodawany_tag)
-                            if (!wszystkie_tagi.includes(dodawany_tag)) {
-                                funkcje_tagow.dodaj_tag(dodawany_tag)
-                            }
+                        if (!wszystkie_tagi.includes(tag)) {
+                            funkcje_tagow.dodaj_tag({ "name": tag, "popularnosc": 1 })
                         }
+                        let tags_array = szukane_zdjecie["tags"].filter((tag_name) => tag_name["name"] == tag["name"])
+                        if (tags_array.length == 0) {
+                            szukane_zdjecie["tags"].push(tag)
+                        }
+
                     });
                     funkcje_JSON.Aktualizacja_zdjecia(szukane_zdjecie, index)
-                    res.write("szukane zdjecie o id " + szukane_id + " zostalo zaktualizowane o podana tablice tagow: " + JSON.stringify(dane))
-                } else {
-                    res.write("Nie ma zdjecia o takim id")
+                    res.write("Zdjecie o id " + szukane_id + " Zostalo zaktualizowane o tagi")
                     res.end()
                     break
                 }
@@ -130,32 +135,32 @@ const imageRouter = async (req, res) => {
             else if (req.url.match(/\/api\/photos\/([0-9]+)\/tags/)) {
                 let dane = await funkcje_tagow.zdobadz_dane(req)
                 let dane_parsed = JSON.parse(dane)
-                let dodawany_tag = dane_parsed["name"]
-                console.log("DODAWANY: " + dodawany_tag);
+                let dodawane_tagi = dane_parsed["tags"]
                 let url_split = req.url.split("/")
                 let szukane_id = url_split[3]
                 let szukane_zdjecie_tablica = zdjecia_dane.filter((element) => element["id"] == szukane_id)
                 let szukane_zdjecie = szukane_zdjecie_tablica[0]
+
                 if (szukane_zdjecie_tablica.length == 0) {
                     res.write("Nie ma zdjecia o takim id")
                     res.end()
                     break
                 }
-                else if (wszystkie_tagi.includes(dodawany_tag) == false) {
-                    res.write("Nie ma takiego tagu!")
-                    res.end()
-                    break
-                }
-                else if (szukane_zdjecie["tags"].includes(dodawany_tag)) {
-                    res.write("Zdjecie juz posiada owy tag")
-                    res.end()
-                    break
-                }
+
                 else {
                     let index = zdjecia_dane.indexOf(szukane_zdjecie)
-                    szukane_zdjecie["tags"].push(dodawany_tag)
+                    dodawane_tagi.forEach(tag => {
+                        if (!wszystkie_tagi.includes(tag)) {
+                            funkcje_tagow.dodaj_tag({ "name": tag, "popularnosc": 1 })
+                        }
+                        let tags_array = szukane_zdjecie["tags"].filter((tag_name) => tag_name["name"] == tag["name"])
+                        if (tags_array.length == 0) {
+                            szukane_zdjecie["tags"].push(tag)
+                        }
+
+                    });
                     funkcje_JSON.Aktualizacja_zdjecia(szukane_zdjecie, index)
-                    res.write("Zdjecie o id " + szukane_id + " Zostalo zaktualizowane o tag " + dodawany_tag)
+                    res.write("Zdjecie o id " + szukane_id + " Zostalo zaktualizowane o tagi")
                     res.end()
                     break
                 }

@@ -143,8 +143,7 @@ export const funkcje_tagow = {
         if (wszystkie_tagi.filter((tag) => { tag.name == dane["name"] }).length != 0) {
             return "tag juz istnieje w bazie danych"
         } else {
-            wszystkie_tagi.push(dane["name"])
-            tagi_popularność.push(dane["popularnosc"])
+            wszystkie_tagi.push({ "name": dane["name"], "popularnosc": dane["popularnosc"], "id": wszystkie_tagi.length - 1 })
             return "tag dodany"
         }
     }

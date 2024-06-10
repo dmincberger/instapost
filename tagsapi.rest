@@ -22,16 +22,22 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/api/photos/1716292775918/tags HTTP/1.1
+PATCH http://localhost:3000/api/photos/1717948618387/tags HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbWluaWtvNzc3QGludGVyaWEucGwiLCJpYXQiOjE3MTc5MjQ3OTIsImV4cCI6MTcxODAxMTE5Mn0.PFcUkTZyTzyoMnJcO1sKhiZHy-m5Lduwk2Xqetc13U4
 Content-Type: application/json
 
 {
-    "name": "testowytag"
+"tags": [    
+        {
+        "name": "testowytag"
+        }
+    ]
 }
 
 ###
 
-PATCH http://localhost:3000/api/photos/1716292958323/tags/mass HTTP/1.1
+PATCH http://localhost:3000/api/photos/1717956243997/tags/mass HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbWluaWtvNzc3QGludGVyaWEucGwiLCJpYXQiOjE3MTc5MjQ3OTIsImV4cCI6MTcxODAxMTE5Mn0.PFcUkTZyTzyoMnJcO1sKhiZHy-m5Lduwk2Xqetc13U4
 Content-Type: application/json
 
 {

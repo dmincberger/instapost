@@ -1,8 +1,10 @@
-GET http://localhost:3000/api/filters/metadata/1716793017359 HTTP/1.1
+GET http://localhost:3000/api/filters/metadata/1717859010975 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpYnJ1c251bWVyQGludGVyaWEucGwiLCJpYXQiOjE3MTc2OTU3MjgsImV4cCI6MTcxNzc4MjEyOH0.6EJ0fm7e2osvAzlIWx59t8b2EV-f_bkbX0lj8LQL4wY
 
 ###
 
-GET http://localhost:3000/api/getimage/1716896264046 HTTP/1.1
+GET http://localhost:3000/api/getimage/1717858716531 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpYnJ1c251bWVyQGludGVyaWEucGwiLCJpYXQiOjE3MTc2OTU3MjgsImV4cCI6MTcxNzc4MjEyOH0.6EJ0fm7e2osvAzlIWx59t8b2EV-f_bkbX0lj8LQL4wY
 
 ###
 
@@ -10,7 +12,7 @@ PATCH http://localhost:3000/api/filters
 Content-Type: 'application/json'
 
 {
-    "id": 1716896264046,
+    "id": 1717776455318,
     "filter": "negate"
 }
 

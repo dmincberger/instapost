@@ -13,7 +13,7 @@ const image_get_Router = async (req, res) => {
                 for (const history_moment of found_photo["history"]) {
                     if (history_moment["status"] == requested_filter) {
                         let file = await image_getting.get_file(history_moment["url"])
-                        res.setHeader('Content-Type', 'image/jpeg')
+                        res.setHeader('Content-Type', 'image/png')
                         res.write(file)
                         res.end()
                         return 0
@@ -27,18 +27,32 @@ const image_get_Router = async (req, res) => {
                 console.log("cfffaffokeroghuihuiegwh");
                 let req_split = req.url.split("/")
                 let photo_id = req_split[3]
+                console.log("PHOTO_ID: " + req_split);
                 let found_photos = zdjecia_dane.filter((photo) => photo["id"] == photo_id)
-                let found_url = found_photos[0]["url"]
-                if (found_url == undefined) {
+                if (found_photos.length == 0) {
+                    console.log("nie ma");
                     res.write(JSON.stringify("no such photo exists", 5, null))
                     res.end()
                 } else {
+                    let indexik = found_photos[0]["history"].length - 1
+                    let found_url = found_photos[0]["url"]
+                    console.log(indexik + ": INDEX");
+                    if (indexik != 0) {
+                        found_url = found_photos[0]["history"][indexik]["url"]
+                        console.log("FOUND URL: " + found_url);
+                    }
+
                     let file = await image_getting.get_file(found_url)
+                    console.log(file);
+                    console.log("jest");
                     res.setHeader('Content-Type', 'image/jpeg')
                     res.write(file)
                     res.end()
                 }
             }
+
+
+
     }
 }
 

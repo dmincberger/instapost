@@ -3,8 +3,9 @@ const filter_functions = {
     get_metadata: async function (server_image_path) {
         return new Promise(async (resolve, reject) => {
             try {
-
+                console.log(server_image_path);
                 if (server_image_path) {
+                    console.log("TIIII");
                     let meta = await sharp(server_image_path)
                         .metadata()
                     resolve(meta)
@@ -14,7 +15,7 @@ const filter_functions = {
                 }
 
             } catch (err) {
-                reject(err.mesage)
+                reject(err.message)
             }
         })
     },
@@ -29,6 +30,7 @@ const filter_functions = {
                     let joined_name = split_name.join(".")
                     split_path[split_path.length - 1] = joined_name + "-rotate." + extension
                     let new_photo_path = split_path.join("\\")
+                    let filtered_photo = await sharp(server_image_path)
                         .rotate(90)
                         .toFile(new_photo_path)
                     resolve(new_photo_path)
@@ -107,7 +109,72 @@ const filter_functions = {
                     resolve(new_photo_path)
                 })
         }
-    }
+    },
+    filter_base64_photo: async function (buffer_data, filter) {
+        switch (filter) {
+            case "rotate":
+                return new Promise(async (resolve, reject) => {
+                    let filtered_photo = await sharp(buffer_data)
+                        .rotate(90)
+                        .toBuffer()
+                    resolve(filtered_photo)
+                })
+            case "resize":
+                return new Promise(async (resolve, reject) => {
+                    let filtered_photo = await sharp(buffer_data)
+                        .resize({
+                            width: 159,
+                            height: 100
+                        })
+                        .toBuffer()
+                    resolve(filtered_photo)
+                })
+            case "crop":
+                return new Promise(async (resolve, reject) => {
+                    let filtered_photo = await sharp(buffer_data)
+                        .extract({ width: 200, height: 200, left: 20, top: 20 })
+                        .toBuffer();
+                    resolve(filtered_photo)
+                })
+            case "grayscale":
+                return new Promise(async (resolve, reject) => {
+                    let filtered_photo = await sharp(buffer_data)
+                        .grayscale()
+                        .toBuffer();
+                    resolve(filtered_photo)
+                })
+            case "negate":
+                return new Promise(async (resolve, reject) => {
+                    let filtered_photo = await sharp(buffer_data)
+                        .negate()
+                        .toBuffer();
+                    resolve(filtered_photo)
+                })
+            case "tint":
+                return new Promise(async (resolve, reject) => {
+                    let filtered_photo = await sharp(buffer_data)
+                        .tint({ r: 255, g: 0, b: 0 })
+                        .toBuffer();
+                    resolve(filtered_photo)
+                })
+            case "flip":
+                return new Promise(async (resolve, reject) => {
+                    let filtered_photo = await sharp(buffer_data)
+                        .flip()
+                        .toBuffer()
+                    resolve(filtered_photo)
+                })
+            case "flop":
+                return new Promise(async (resolve, reject) => {
+                    let filtered_photo = await sharp(buffer_data)
+                        .flop()
+                        .toBuffer()
+                    resolve(filtered_photo)
+                })
+        }
+    },
 }
+
+
 
 export default filter_functions

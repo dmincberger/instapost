@@ -65,7 +65,8 @@ const user_router = async (req, res) => {
                     "lastname": parsed_data["lastName"],
                     "email": parsed_data["email"],
                     "confirmed": false,
-                    "password": hashed_password
+                    "password": hashed_password,
+                    "picture": null
                 }
                 let new_token = await token_functions.create_token(parsed_data["email"], "1h")
                 user_functions.add_register_user(new_user)

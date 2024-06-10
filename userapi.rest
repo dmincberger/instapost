@@ -4,7 +4,7 @@ Content-Type: "application/json"
 {    
    "name": "house",
    "lastName": "lastName",
-   "email":"librusnumer@interia.pl",
+   "email":"dominiko777@interia.pl",
    "password":"password"
 }
 
@@ -17,6 +17,6 @@ POST http://localhost:3000/api/user/login HTTP/1.1
 Content-Type: "application/json"
 
 {
-   "email":"librusnumer@interia.pl",
+   "email":"dominiko777@interia.pl",
    "password":"password"
 }

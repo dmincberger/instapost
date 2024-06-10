@@ -1,10 +1,6 @@
 import formidable from "formidable";
 import path from "path";
 import Funkcje_Plikow from "../controllers/fileController.js";
-import * as fs from 'fs'
-
-
-
 
 
 let __dirname = path.resolve()
@@ -48,13 +44,14 @@ export const upload_profile_picture = async (req, album) => {
             form.uploadDir = 'uploads'
             form.keepExtensions = true;
             form.parse(req, async function (err, fields, files) {
-                let split_path = files["file"]["path"].split("\\")
+                console.log(Object.keys(files["files"]));
+                let split_path = files["files"]["path"].split("\\")
                 let name = split_path.pop()
                 split_path.push(album)
                 let extension = name.split(".")[1]
                 split_path.push("profile." + extension)
                 split_path.join("/")
-                await Funkcje_Plikow.Upload_profile_picture(__dirname, files["file"]["path"], split_path)
+                await Funkcje_Plikow.Upload_profile_picture(__dirname, files["files"]["path"], split_path)
                 // console.log("----- przesłane pola z formularza ------");
 
                 // console.log(fields);
@@ -85,5 +82,7 @@ export const get_body_data = async (req) => {
     })
 
 }
+
+
 
 export default getRequestData

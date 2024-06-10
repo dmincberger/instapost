@@ -10,11 +10,11 @@ const filterRouter = async (req, res) => {
                 let req_split = req.url.split("/")
                 let photo_id = req_split[4]
                 let found_photos = zdjecia_dane.filter((photo) => photo["id"] == photo_id)
-                let found_url = found_photos[0]["url"]
-                if (found_url == undefined) {
+                if (found_photos.length == 0) {
                     res.write(JSON.stringify("no such photo exists", 5, null))
                     res.end()
                 } else {
+                    let found_url = found_photos[0]["url"]
                     let response = await filter_functions.get_metadata(found_url)
                     res.write(JSON.stringify(response, 5, null))
                     res.end()
@@ -22,12 +22,21 @@ const filterRouter = async (req, res) => {
                 break
             }
         case "PATCH":
-            if (req.url.match("\/api\/filters")) {
+            if (req.url.match("\/api\/filters\/([0-9]+)")) {
                 let dane = await get_body_data(req)
+                console.log(dane);
                 let dane_parsed = JSON.parse(dane)
-                let chosen_id = dane_parsed["id"]
+                let req_split = req.url.split("/")
+                let chosen_id = req_split[3]
+                console.log(chosen_id);
                 let found_photos = zdjecia_dane.filter((photo) => photo["id"] == chosen_id)
+                let indexik = found_photos[0]["history"].length - 1
                 let found_url = found_photos[0]["url"]
+                console.log(indexik + ": INDEX");
+                if (indexik != 0) {
+                    found_url = found_photos[0]["history"][indexik]["url"]
+                    console.log("FOUND URL: " + found_url);
+                }
                 if (found_url == undefined) {
                     res.write(JSON.stringify("no such photo exists", 5, null))
                     res.end()
@@ -48,6 +57,20 @@ const filterRouter = async (req, res) => {
                     res.write(photo)
                     res.end()
                 }
+            }
+        case "POST":
+            if (req.url.match("\/api\/filters")) {
+                let dane = await get_body_data(req)
+                let parsed_dane = await JSON.parse(dane)
+                console.log(dane);
+                let file_data = parsed_dane["file"]
+                file_data = file_data.replace(/^data:image\/\w+;base64,/, '')
+                let buffer_data = Buffer.from(file_data, 'base64')
+                let filter = parsed_dane["filter"]
+                let filtered_photo = await filter_functions.filter_base64_photo(buffer_data, filter)
+                res.setHeader('Content-Type', 'image/jpeg')
+                res.write(filtered_photo)
+                res.end()
             }
     }
 }

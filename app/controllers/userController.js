@@ -29,10 +29,14 @@ const user_functions = {
             }
             index++
         }
-        for (const key of Object.keys(info)) {
-            current_users_JSON[index][key] = info[key]
+        console.log("KLUCZE: " + Object.keys(info[0]));
+        console.log("INFO: " + JSON.stringify(info[0]));
+        for (const key of Object.keys(info[0])) {
+            current_users_JSON[index][key] = info[0][key]
+            console.log(current_users_JSON[index][key]);
+
         }
-        console.log(info);
+        console.log(email);
     },
 
     get_user_info: async (fields, email) => {

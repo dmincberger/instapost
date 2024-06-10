@@ -1,9 +1,9 @@
 POST http://localhost:3000/api/photos HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpYnJ1c251bWVyQGludGVyaWEucGwiLCJpYXQiOjE3MTc2OTU3MjgsImV4cCI6MTcxNzc4MjEyOH0.6EJ0fm7e2osvAzlIWx59t8b2EV-f_bkbX0lj8LQL4wY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbWluaWtvNzc3QGludGVyaWEucGwiLCJpYXQiOjE3MTc5MjQ3OTIsImV4cCI6MTcxODAxMTE5Mn0.PFcUkTZyTzyoMnJcO1sKhiZHy-m5Lduwk2Xqetc13U4
 Content-Type: multipart/form-data; boundary=----FormBoundary1234
 
 ------FormBoundary1234
-Content-Disposition: form-data; name="file"; filename="input.jpg"
+Content-Disposition: form-data; name="file"; filename="default.jpg"
 Content-Type: image/jpeg
 
 < ./input.jpg
@@ -16,9 +16,11 @@ house
 ------FormBoundary1234
 ###
 GET http://localhost:3000/api/photos HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpYnJ1c251bWVyQGludGVyaWEucGwiLCJpYXQiOjE3MTc2OTU3MjgsImV4cCI6MTcxNzc4MjEyOH0.6EJ0fm7e2osvAzlIWx59t8b2EV-f_bkbX0lj8LQL4wY
 
 ###
 GET http://localhost:3000/api/photos/1716791370587 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpYnJ1c251bWVyQGludGVyaWEucGwiLCJpYXQiOjE3MTc2OTU3MjgsImV4cCI6MTcxNzc4MjEyOH0.6EJ0fm7e2osvAzlIWx59t8b2EV-f_bkbX0lj8LQL4wY
 
 ###
 

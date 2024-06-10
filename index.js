@@ -21,26 +21,25 @@ createServer(async (req, res) => {
     }
     console.log("HELLO?: " + req.method);
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
-        if (req.url.search("/api/photos") != -1) {
-            await imageRouter(req, res)
-        }
-
-
-        else if (req.url.search("/api/tags") != -1) {
+        if (req.url.search("/api/tags") != -1) {
             await tagsRouter(req, res)
         } else if (req.url.search("/api/filters") != -1) {
             await filterRouter(req, res)
-        } else if (req.url.search("/api/getimage") != -1) {
-            await image_get_Router(req, res)
+
         } else if (req.url.search("/api/profile") != -1) {
             await profile_router(req, res)
         }
     }
-    if (req.url.search("/api/user") != -1) {
+    if (req.url.search("/api/photos") != -1) {
+        await imageRouter(req, res)
+    }
+    else if (req.url.search("/api/user") != -1) {
         await user_router(req, res)
+    } else if (req.url.search("/api/getimage") != -1) {
+        await image_get_Router(req, res)
     } else if (req.url.search("/api/tests") != -1) {
         await tests_router(req, res)
-    } else if (!req.headers.authorization && !req.headers.authorization.startsWith("Bearer")) {
+    } else if (!req.headers.authorization) {
         res.setHeader("Content-Type", "text/plain")
         res.write("Nie masz dostępu do tego")
         res.end()

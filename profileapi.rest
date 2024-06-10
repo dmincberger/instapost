@@ -1,5 +1,5 @@
 GET http://localhost:3000/api/profile HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbWVAZW1haWwucGwiLCJpYXQiOjE3MTcxODkxMDEsImV4cCI6MTcxNzI3NTUwMX0.VDX0uGMgGUGjwqgrKJWM64uLsQLj-AXdA8FwqkRvneA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbWluaWtvNzc3QGludGVyaWEucGwiLCJpYXQiOjE3MTc4MzY0ODIsImV4cCI6MTcxNzkyMjg4Mn0.76h_llRGTJuFSffGiCLFm7GMQ8aJc6IgeS74dCGhwVY
 
 ###
 
@@ -15,7 +15,7 @@ Content-Type: "application/json"
 ###
 
 POST http://localhost:3000/api/profile HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbWVAZW1haWwucGwiLCJpYXQiOjE3MTcxODkyNTMsImV4cCI6MTcxNzI3NTY1M30.2VBA397SHIYdrso3ueSohdz5N4SXw-SbYi5tsIrOm3A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbWluaWtvNzc3QGludGVyaWEucGwiLCJpYXQiOjE3MTc4MzY0ODIsImV4cCI6MTcxNzkyMjg4Mn0.76h_llRGTJuFSffGiCLFm7GMQ8aJc6IgeS74dCGhwVY
 Content-Type: multipart/form-data; boundary=----FormBoundary1234
 
 ------FormBoundary1234
@@ -25,3 +25,14 @@ Content-Type: image/jpeg
 < ./input.jpg
 
 ------FormBoundary1234
+
+###
+
+GET http://localhost:3000/api/profile/images HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRvbWluaWtvNzc3QGludGVyaWEucGwiLCJpYXQiOjE3MTc4MzY0ODIsImV4cCI6MTcxNzkyMjg4Mn0.76h_llRGTJuFSffGiCLFm7GMQ8aJc6IgeS74dCGhwVY
+
+###
+
+GET http://localhost:3000/api/profile/picture HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImxpYnJ1c251bWVyQGludGVyaWEucGwiLCJpYXQiOjE3MTc5MjI2MzMsImV4cCI6MTcxNzkyNjIzM30.zKlaNy6KzK77wA_gMIj4aVk_WRze_yhjYID4dePRn6c
+

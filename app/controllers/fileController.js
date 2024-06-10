@@ -24,6 +24,8 @@ let Funkcje_Plikow = {
         return 0
     },
 
+    
+
     Upload_profile_picture: async (root_sciezka, stara_sciezka, sciezka) => {
         sciezka = sciezka.join("/")
         console.log(`NOWA SCIEZKA: ${sciezka}`);
